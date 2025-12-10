@@ -2,6 +2,9 @@ import senderEmail from '../config/sendEmail.js';
 import UserModel from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import verifyEmailTemplate from '../utils/verifyEmailTemplate.js';
+import generatedAccessToken from '../utils/generatedAccessToken.js';
+import generatedRefreshToken from '../utils/generatedRefreshToken.js';
+import uploadImageCloudinary from '../utils/uploadImageCloudinary.js';
 
 export async function registerUserController(req, res) {
     try {
@@ -11,7 +14,7 @@ export async function registerUserController(req, res) {
                 message: "Campos obrigatórios não preenchidos.",
                 error: true, success: false
             });
-        }
+        };
 
         const user = await UserModel.findOne({ email });
         if (user) {
@@ -19,7 +22,7 @@ export async function registerUserController(req, res) {
                 message: "Já existe usuário com este e-mail.",
                 error: true, success: false
             });
-        }
+        };
 
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
@@ -52,8 +55,8 @@ export async function registerUserController(req, res) {
             message: error.message || error,
             error: true, success: false
         });
-    }
-}
+    };
+};
 
 export async function verifyEmailController(req, res) {
     try {
@@ -64,7 +67,7 @@ export async function verifyEmailController(req, res) {
                 message: "Código de verificação inválido.",
                 error: true, success: false
             });
-        }
+        };
 
         const updatedUser = await UserModel.findOne(
             { _id: code },
@@ -81,5 +84,116 @@ export async function verifyEmailController(req, res) {
             message: error.message || error,
             error: true, success: false
         });
-    }
-}
+    };
+};
+
+export async function loginController(req, res) {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Campos obrigatórios não preenchidos!",
+                error: true, success: false
+            });
+        };
+
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(400).json({
+                message: "Usuário não encontrado!",
+                error: true, success: false
+            });
+        };
+
+        if (user.status !== "Active") {
+            return res.status(400).json({
+                message: "Login não ativado, entre em contato com seu administrador!",
+                error: true, succes: false
+            });
+        };
+
+        const checkPassword = await bcrypt.compare(password, user.password)
+        if (!checkPassword) {
+            return res.status(400).json({
+                message: "Senha incorreta",
+                error: true, success: false
+            });
+        };
+
+        const accessToken = await generatedAccessToken(user._id);
+        const refreshToken = await generatedRefreshToken(user._id);
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None"
+        };
+
+        res.cookie("accessToken", accessToken, cookieOptions);
+        res.cookie("refreshToken", refreshToken, cookieOptions);
+
+        return res.json({
+            message: "Logado com sucesso",
+            success: true, error: false, data: { accessToken, refreshToken }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true, success: false
+        });
+    };
+};
+
+export async function logoutController(req, res) {
+    try {
+        const userId = req.userId;
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None"
+        };
+
+        res.clearCookie("accessToken", cookieOptions);
+        res.clearCookie("refreshToken", cookieOptions);
+
+        const removeRefreshToken = await UserModel.findByIdAndUpdate(userId, {
+            refresh_token: ""
+        });
+
+        return res.json({
+            message: "Saindo do sistema com segurança!",
+            success: true, error: false
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true, success: false
+        });
+    };
+};
+
+
+export async function uploadAvatar(req, res) {
+    try {
+        const userId = req.userId;
+        const image = req.file;
+
+        const upload = await uploadImageCloudinary(image)
+
+        const updateAvatar = await UserModel.findByIdAndUpdate(userId, {
+            avatar: upload.url
+        });
+
+        return res.json({
+            message: "Avatar atualizado!",
+            success: true, error: false,
+            data: { _id: userId, avatar: upload.url }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true, success: false
+        });
+    };
+};
