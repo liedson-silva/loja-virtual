@@ -8,15 +8,15 @@ if (!process.env.RESEND_API) {
 
 const resend = new Resend(process.env.RESEND_API);
 
-const senderEmail = async ({ sendTo, subject, html }) => {
+const sendEmail = async ({ sendTo, subject, html }) => {
     try {
         const { data, error } = await resend.emails.send({
-            from: 'lojaVirtual <onboarding@resend.dev>',
+            from: 'Loja Virtual <onboarding@resend.dev>',
             to: sendTo,
             subject: subject,
             html: html,
         });
-        
+
         if (error) {
             return console.error({ error });
         }
@@ -28,4 +28,4 @@ const senderEmail = async ({ sendTo, subject, html }) => {
     }
 };
 
-export default senderEmail;
+export default sendEmail;
