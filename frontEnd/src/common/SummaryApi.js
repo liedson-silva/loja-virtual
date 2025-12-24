@@ -1,4 +1,4 @@
-export const baseUrl = 'https://loja-virtual-phi-lyart.vercel.app';
+export const baseUrl = 'https://loja-virtual-liedson.vercel.app';
 
 const SummaryApi = {
     register: {
@@ -40,6 +40,26 @@ const SummaryApi = {
     updateUserDetails:{
         url: '/update-user',
         method: 'put',
+    },
+    addCategory:{
+        url: '/api/category/add-category',
+        method: 'post',
+    },
+    getCategory:{
+        url: '/api/category/get',
+        method: 'get',
+    },
+    updateCategory:{
+        url: '/api/category/update',
+        method: 'put',
+    },
+    deleteCategory:{
+        url: '/api/category/delete',
+        method: 'delete',
+    },
+    uploadImage:{
+        url: '/api/file/upload',
+        method: 'post',
     },
 }
 

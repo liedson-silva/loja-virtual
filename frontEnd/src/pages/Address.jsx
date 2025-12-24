@@ -2,7 +2,7 @@ import React from 'react'
 
 const Address = () => {
   return (
-    <div>Endereço</div>
+    <div className='min-h-[80vh]'>Endereço</div>
   )
 }
 

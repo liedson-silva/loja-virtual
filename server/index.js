@@ -9,6 +9,8 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import userRouter from './routes/user.route.js';
+import categoryRouter from './routes/category.route.js';
+import uploadRouter from './routes/upload.route.js';
 
 const app = express();
 app.use(cors({
@@ -17,7 +19,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(helmet({
     crossOriginResourcePolicy: false
 }));
@@ -25,6 +27,8 @@ app.use(helmet({
 app.get('/', (req, res) => res.json({ message: 'Servidor comunicando' }));
 
 app.use('/', userRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/file', uploadRouter);
 
 const PORT = 3000 || process.env.PORT;
 connectDB().then(() => {
