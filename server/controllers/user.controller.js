@@ -95,7 +95,7 @@ export async function loginController(req, res) {
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).json({
-                message: "#e6f2ff",
+                message: "Campos obrigatórios não preenchidos.",
                 error: true, success: false
             });
         };
@@ -125,6 +125,10 @@ export async function loginController(req, res) {
 
         const accessToken = await generatedAccessToken(user._id);
         const refreshToken = await generatedRefreshToken(user._id);
+
+        const updateUser = await UserModel.findByIdAndUpdate(user._id, {
+            last_login_data: new Date()
+        });
 
         const cookieOptions = {
             httpOnly: true,
@@ -283,7 +287,7 @@ export async function verifyForgotPasswordOtp(req, res) {
         const user = await UserModel.findOne({ email });
         if (!user) {
             return res.status(400).json({
-                message: "E-mail não foi encontrado!",
+                message: "E-mail não encontrado!",
                 error: true, success: false
             });
         };
@@ -395,6 +399,30 @@ export async function refreshToken(req, res) {
         return res.json({
             message: "Novo token de acesso gerado com sucesso!",
             success: true, error: false, data: { accessToken: newAccessToken }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true, success: false
+        });
+    };
+};
+
+export async function userDetails(req, res) {
+    try {
+        const userId = req.userId;
+
+        const user = await UserModel.findById(userId).select("-password -refresh_token");
+        if (!user) {
+            return res.status(400).json({
+                message: "Usuário não encontrado",
+                error: true, success: false
+            });
+        };
+
+        return res.json({
+            message: "Detalhes do usuário obtidos com sucesso!",
+            success: true, error: false, data: user
         });
     } catch (error) {
         return res.status(500).json({

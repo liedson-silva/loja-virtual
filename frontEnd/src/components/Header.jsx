@@ -1,14 +1,27 @@
-import React, { use } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaRegCircleUser } from 'react-icons/fa6'
 import Search from './Search'
 import { BsCart4 } from 'react-icons/bs';
+import { useSelector } from 'react-redux'
+import { GoTriangleUp, GoTriangleDown } from 'react-icons/go';
+import UserMenu from './UserMenu';
 
 const Header = () => {
     const navigate = useNavigate();
+    const user = useSelector((state) => state?.user);
+    const [openUserMenu, setOpenUserMenu] = useState(false);
 
     const redirectToLoginPage = () => {
         navigate('/login');
+    };
+
+    const handleMobileUser = () => {
+        if (!user._id) {
+            navigate('/login');
+            return;
+        }
+        navigate('/user-menu-mobile');
     };
 
     return (
@@ -32,19 +45,40 @@ const Header = () => {
                     <Search />
                 </div>
                 <div>
-                    <button className='text-neutral-600 lg:hidden mr-4'>
+                    <button className='text-neutral-600 lg:hidden mr-4' onClick={handleMobileUser}>
                         <FaRegCircleUser size={25} />
                     </button>
-                    <div className='hidden lg:flex items-center gap-10'>
-                        <button onClick={redirectToLoginPage} className='text-lg px-2'>
-                            Entrar
-                        </button>
 
-                        <button className='flex items-center gap-2 bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 px-3 py-2 rounded text-white'>
+                    <div className='hidden lg:flex items-center gap-10'>
+                        {user?._id ? (
+                            <div className='relative'>
+                                <div onClick={() => setOpenUserMenu(!openUserMenu)} className='flex select-none items-center gap-1 cursor-pointer'>
+                                    <p>Minha conta</p>
+                                    {openUserMenu ? (
+                                        <GoTriangleUp size={25} />
+                                    ) : (
+                                        <GoTriangleDown size={25} />
+                                    )}
+                                </div>
+                                {openUserMenu && (
+                                    <div className='absolute right-0 top-12'>
+                                        <div className='bg-white border rounded shadow-lg p-4 min-w-48'>
+                                            <UserMenu close={() => setOpenUserMenu(false)} />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <button onClick={redirectToLoginPage} className='text-lg px-2'>
+                                Entrar
+                            </button>
+                        )}
+
+                        <button className='flex items-center gap-2 bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 px-3 py-2 rounded text-white hover:opacity-90'>
                             <div>
                                 <BsCart4 size={25} />
                             </div>
-                            <div className='font-semibold text-sm'>
+                            <div className='font-semibold text-sm '>
                                 <p>Carrinho</p>
                             </div>
                         </button>
