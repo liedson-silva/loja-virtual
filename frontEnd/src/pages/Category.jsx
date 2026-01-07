@@ -40,10 +40,6 @@ const Category = () => {
         };
     };
 
-    useEffect(() => {
-        fetchCategory();
-    }, []);
-
     const handleDeleteCategory = async () => {
         try {
             const response = await Axios({
