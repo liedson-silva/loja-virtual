@@ -2,64 +2,72 @@ export const baseUrl = 'https://loja-virtual-phi-lyart.vercel.app';
 
 const SummaryApi = {
     register: {
-        url: '/register',
+        url: '/user/register',
         method: 'post',
     },
-    login:{
-        url: '/login',
+    login: {
+        url: '/user/login',
         method: 'post',
     },
-    forgot_password:{
-        url: '/forgot-password',
+    forgot_password: {
+        url: '/user/forgot-password',
         method: 'put',
     },
-    verify_otp:{
-        url: '/verify-forgot-password-otp',
+    verify_otp: {
+        url: '/user/verify-forgot-password-otp',
         method: 'put',
     },
-    resetPassword:{
-        url: '/reset-password',
+    resetPassword: {
+        url: '/user/reset-password',
         method: 'put',
     },
-    refreshToken:{
-        url: '/refresh-token',
+    refreshToken: {
+        url: '/user/refresh-token',
         method: 'post',
     },
-    userDetails:{
-        url: '/user-details',
+    userDetails: {
+        url: '/user/user-details',
         method: 'get',
     },
-    logout:{
-        url: '/logout',
+    logout: {
+        url: '/user/logout',
         method: 'get',
     },
-    uploadAvatar:{
-        url: '/upload-avatar',
+    uploadAvatar: {
+        url: '/user/upload-avatar',
         method: 'put',
     },
-    updateUserDetails:{
-        url: '/update-user',
+    updateUserDetails: {
+        url: '/user/update-user',
         method: 'put',
     },
-    addCategory:{
-        url: '/api/category/add-category',
+    addCategory: {
+        url: '/category/add-category',
         method: 'post',
     },
-    getCategory:{
-        url: '/api/category/get',
+    getCategory: {
+        url: '/category/get',
         method: 'get',
     },
-    updateCategory:{
-        url: '/api/category/update',
+    updateCategory: {
+        url: '/category/update',
         method: 'put',
     },
-    deleteCategory:{
-        url: '/api/category/delete',
+    deleteCategory: {
+        url: '/category/delete',
         method: 'delete',
     },
-    uploadImage:{
-        url: '/api/file/upload',
+    uploadImage: {
+        url: '/file/upload',
         method: 'post',
+    },
+    createSubCategory: {
+        url: '/subcategory/create',
+        method: 'post',
+    },
+    getSubCategory: {
+        url: '/subcategory/get',
+        method: 'get',
     },
 }
 

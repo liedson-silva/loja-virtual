@@ -11,6 +11,7 @@ import helmet from 'helmet';
 import userRouter from './routes/user.route.js';
 import categoryRouter from './routes/category.route.js';
 import uploadRouter from './routes/upload.route.js';
+import SubCategoryRouter from './routes/subCategory.route.js';
 
 const app = express();
 app.use(cors({
@@ -26,9 +27,10 @@ app.use(helmet({
 
 app.get('/', (req, res) => res.json({ message: 'Servidor comunicando' }));
 
-app.use('/', userRouter);
-app.use('/api/category', categoryRouter);
-app.use('/api/file', uploadRouter);
+app.use('/user', userRouter);
+app.use('/category', categoryRouter);
+app.use('/file', uploadRouter);
+app.use('/subcategory', SubCategoryRouter);
 
 const PORT = 3000 || process.env.PORT;
 connectDB().then(() => {

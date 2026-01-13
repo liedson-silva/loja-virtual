@@ -16,7 +16,7 @@ Loja Virtual moderno, com recursos como cadastro de produtos, carrinho de compra
 ## 🌍 Acesse o projeto
 
 Você pode acessar o projeto online clicando no link abaixo:  
-👉  [em andamento...](#)
+👉  [em andamento...](https://loja-virtual-liedson.vercel.app)
 
 ## Imagem do projeto
    
