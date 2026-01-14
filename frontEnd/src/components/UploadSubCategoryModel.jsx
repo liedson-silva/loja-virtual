@@ -169,7 +169,7 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
                             </div>
 
                             <select
-                                className="w-full p-2 bg-transparent outline-none border cursor-pointer"
+                                className="w-full p-2 bg-transparent outline-none border"
                                 onChange={(e) => {
                                     const value = e.target.value;
                                     const categoryDetails = allCategory.find(

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import uploadImage from "../utils/uploadImage";
+import uploadImage from "../utils/UploadImage";
 import Loading from "../components/Loading";
 import ViewImage from "../components/ViewImage";
 import AddFieldComponent from "../components/AddFieldComponent";
