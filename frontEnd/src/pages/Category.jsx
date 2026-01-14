@@ -76,7 +76,7 @@ const Category = () => {
                 {categoryData.map((category, index) => {
                     return (
                         <div
-                            className='w-32 h-56 rounded shadow-md flex flex-col'
+                            className='max-w-40 max-h-56 rounded shadow-md flex flex-col p-2 gap-2 '
                             key={category._id}
                         >
                             <img
@@ -86,19 +86,19 @@ const Category = () => {
                             />
 
                             <div className='flex justify-center mt-2'>
-                                <span className='text-sm font-semibold text-center'>
+                                <span className='text-sm font-semibold text-center truncate'>
                                     {category.name}
                                 </span>
                             </div>
 
-                            <div className='flex gap-2 mt-auto'>
+                            <div className='flex gap-2 mt-auto justify-center'>
                                 <button
                                     onClick={() => {
                                         setOpenEdit(true);
                                         setEditData(category);
                                     }}
-                                    className='flex-1 bg-green-100 hover:bg-green-200 text-green-600 font-medium py-1 rounded'
-                                >
+                                    className='bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600 transition-colors'
+                                > 
                                     Editar
                                 </button>
                                 <button
@@ -106,7 +106,7 @@ const Category = () => {
                                         setOpenConfirmBoxDelete(true);
                                         setDeleteCategory(category);
                                     }}
-                                    className='flex-1 bg-red-100 hover:bg-red-200 text-red-600 font-medium py-1 rounded'
+                                    className='bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition-colors'
                                 >
                                     Deletar
                                 </button>

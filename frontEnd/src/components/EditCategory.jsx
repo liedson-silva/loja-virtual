@@ -66,7 +66,7 @@ const EditCategory = ({ close, fetchData, data: categoryData }) => {
 
     return (
         <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-            <div className='bg-gradient-to-r from-blue-300 via-blue-150 to-blue-50 max-w-4xl w-full p-4 rounded'>
+            <div className='bg-blue-100 max-w-4xl w-full p-4 rounded'>
                 <div className='flex items-center justify-between'>
                     <h1 className='font-bold'>Atualizar categoria</h1>
                     <button onClick={close} className='w-fit block ml-auto'>
@@ -87,7 +87,7 @@ const EditCategory = ({ close, fetchData, data: categoryData }) => {
                         />
                     </div>
                     <div className='grid gap-1'>
-                        <p>Foto: <FaAsterisk className='size-2 text-red-500' /></p>
+                       <p className="flex gap-1 font-semibold">Foto: <FaAsterisk className='size-2 text-red-500' /></p>
                         <div className='flex gap-4 flex-col lg:flex-row items-center'>
                             <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
                                 {data.image ? (

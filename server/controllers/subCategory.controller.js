@@ -47,3 +47,58 @@ export const getSubCategoryController = async (req, res) => {
         });
     };
 };
+
+export const UpdateSubCategoryController = async (req, res) => {
+    try {
+        const { _id, name, image, category } = req.body;
+
+        const checkSub = await SubCategoryModel.findById(_id)
+        if (!checkSub) {
+            return res.status(400).json({
+                message: "Sub categoria não encontrada.",
+                error: true,
+                success: false
+            });
+        };
+
+        const updateSubCategory = await SubCategoryModel.findByIdAndUpdate(_id, {
+            name,
+            image,
+            category
+        })
+
+        return res.json({
+            message: "Sub categoria atualizada com sucesso!",
+            data: updateSubCategory,
+            success: true,
+            error: false
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
+    };
+};
+
+export const DeleteSubCategoryController = async (req, res) => {
+    try {
+        const { _id } = req.body;
+
+        const deleteSub = await SubCategoryModel.findOneAndDelete({ _id: _id })
+
+        return res.json({
+            message: "Sub categoria deletada com sucesso!",
+            data: deleteSub,
+            success: true,
+            error: false
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
+    };
+};

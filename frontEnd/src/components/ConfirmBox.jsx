@@ -4,9 +4,9 @@ import { IoClose } from 'react-icons/io5'
 const ConfirmBox = ({ cancel, confirm, close}) => {
   return (
     <div className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-        <div className='bg-gradient-to-r from-blue-300 via-blue-150 to-blue-50 max-w-md w-full p-4 rounded'>
+        <div className='bg-blue-100 max-w-md w-full p-4 rounded'>
             <div className='flex items-center justify-between'>
-                <h1>Deletar Permanente</h1>
+                <h1 className="flex gap-1 font-semibold">Deletar Permanente</h1>
                 <button onClick={close}>
                     <IoClose size={25} />
                 </button>

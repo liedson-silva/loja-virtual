@@ -1,28 +1,29 @@
 import { useState } from "react"
-import { IoClose } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import uploadImage from "../utils/UploadImage";
-import { useSelector } from 'react-redux'
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
-import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
+import { IoClose } from "react-icons/io5";
 import { FaAsterisk } from "react-icons/fa";
+import toast from "react-hot-toast";
 
-const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
+const EditSubCategory = ({ close, data, fetchData }) => {
     const [subCategoryData, setSubCategoryData] = useState({
-        name: '',
-        image: '',
-        category: [],
+        _id: data._id,
+        name: data.name,
+        image: data.image,
+        category: data.category || []
     });
-
     const allCategory = useSelector((state) => state.product.allCategory);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setSubCategoryData((prev) => {
+
+        setSubCategoryData((preve) => {
             return {
-                ...prev,
-                [name]: value,
+                ...preve,
+                [name]: value
             };
         });
     };
@@ -36,10 +37,10 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
         const response = await uploadImage(file);
         const { data: ImageResponse } = response;
 
-        setSubCategoryData((prev) => {
+        setSubCategoryData((preve) => {
             return {
-                ...prev,
-                image: ImageResponse.data.url,
+                ...preve,
+                image: ImageResponse.data.url
             };
         });
     };
@@ -48,10 +49,11 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
         const index = subCategoryData.category.findIndex(
             (el) => el._id === categoryId
         );
+
         subCategoryData.category.splice(index, 1);
-        setSubCategoryData((prev) => {
+        setSubCategoryData((preve) => {
             return {
-                ...prev
+                ...preve
             };
         });
     };
@@ -61,31 +63,24 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
 
         try {
             const response = await Axios({
-                ...SummaryApi.createSubCategory,
+                ...SummaryApi.updateSubCategory,
                 data: subCategoryData
             });
 
             const { data: responseData } = response;
+
+            console.log("responseData", responseData);
             if (responseData.success) {
                 toast.success(responseData.message);
+                if (close) {
+                    close();
+                }
                 if (fetchData) {
                     fetchData();
                 }
-                handleClose();
             }
         } catch (error) {
             AxiosToastError(error);
-        }
-    };
-
-    const handleClose = () => {
-        setSubCategoryData({
-            name: '',
-            image: '',
-            category: []
-        });
-        if (closeModal) {
-            closeModal();
         }
     };
 
@@ -93,8 +88,8 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
         <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
             <div className='bg-blue-100 max-w-4xl w-full p-4 rounded'>
                 <div className='flex items-center justify-between'>
-                    <h1 className='font-bold'>Nova Sub Categoria</h1>
-                    <button onClick={handleClose} className='w-fit block ml-auto'>
+                    <h1 className='font-bold'>Atualizar Sub Categoria</h1>
+                    <button onClick={close} className='w-fit block ml-auto'>
                         <IoClose size={25} />
                     </button>
                 </div>
@@ -128,11 +123,11 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
                             <label htmlFor="uploadSubCategoryImage">
                                 <div
                                     className={`
-                                            ${subCategoryData.name
+                                                ${subCategoryData.name
                                             ? 'text-sm cursor-pointer font-bold text-white min-w-20 border px-3 py-1 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
                                             : 'text-sm bg-gray-500 text-white px-3 py-1 rounded-full font-bold'
                                         }
-                                            `}>
+                                                `}>
                                     Carregar Foto
                                 </div>
                                 <input
@@ -202,11 +197,11 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
 
                     <button
                         className={`
-                            ${subCategoryData.name && subCategoryData.image
+                                ${subCategoryData.name && subCategoryData.image
                                 ? 'text-sm cursor-pointer font-bold text-white min-w-20 border px-3 py-1 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
                                 : 'text-sm bg-gray-500 text-white px-3 py-1 rounded-full font-bold'
                             }
-                            `}>
+                                `}>
                         Salvar
                     </button>
                 </form>
@@ -215,4 +210,4 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
     )
 }
 
-export default UploadSubCategoryModel
+export default EditSubCategory
