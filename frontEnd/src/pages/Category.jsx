@@ -76,13 +76,13 @@ const Category = () => {
                 {categoryData.map((category, index) => {
                     return (
                         <div
-                            className='max-w-40 max-h-56 rounded shadow-md flex flex-col p-2 gap-2 '
+                            className='max-w-40 max-h-56 rounded shadow-md flex flex-col p-2 gap-2'
                             key={category._id}
                         >
                             <img
                                 alt={category.name}
                                 src={category.image}
-                                className='w-full h-32 object-cover rounded-t-md'
+                                className='w-full h-32 object-scale-down'
                             />
 
                             <div className='flex justify-center mt-2'>

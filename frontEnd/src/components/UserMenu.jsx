@@ -43,7 +43,7 @@ const UserMenu = ({ close }) => {
             <div className='font-semibold'>Minha conta</div>
             <div className='text-sm flex items-center gap-1'>
                 {user.name || user.mobile} {" "}
-                <span className='text-xs text-gray-500'>
+                <span className='text-xs text-secondary-100'>
                     {user.role === 'ADMIN' ? '[Admin]' : ""}
                 </span>
                 <Link onClick={handleClose} to={'/dashboard/profile'} className='hover:text-primary-100'>
