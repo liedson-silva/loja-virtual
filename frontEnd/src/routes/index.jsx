@@ -91,17 +91,12 @@ const router = createBrowserRouter([
             ]
         },
         {
-            path: ":category",
-            children: [
-                {
-                    path: ":subCategory",
-                    element: <ProductListPage />
-                },
-            ]
+            path: "product/:product",
+            element: <ProductDisplayPage />
         },
         {
-            path: ":product",
-            element: <ProductDisplayPage />
+            path: ":category/:subCategory",
+            element: <ProductListPage />
         },
         ]
     },

@@ -91,7 +91,7 @@ const Category = () => {
                                 </span>
                             </div>
 
-                            <div className='flex gap-2 mt-auto justify-center'>
+                            <div className='grid grid-cols-2 gap-1 mt-auto'>
                                 <button
                                     onClick={() => {
                                         setOpenEdit(true);

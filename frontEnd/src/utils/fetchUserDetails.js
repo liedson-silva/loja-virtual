@@ -10,7 +10,8 @@ const fetchUserDetails = async () => {
         return response.data;
     }
     catch (error) {
-        console.log(error);
+        console.error('Erro ao buscar detalhes do usuário:', error);
+        return null;
     }
 };
 

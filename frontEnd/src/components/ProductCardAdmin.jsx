@@ -42,12 +42,12 @@ const ProductCardAdmin = ({ data, fetchProductData }) => {
                 <img
                     src={data?.image[0]}
                     alt={data?.name}
-                    className='w-full h-32 object-scale-down'
+                    className='w-full h-24 object-scale-down'
                 />
             </div>
             <p className='text-ellipsis line-clamp-2 font-medium'>{data?.name}</p>
-            <p className='text-slate-400'>{data?.unit}</p>
-            <div className='flex gap-2 mt-auto justify-center'>
+            <p className='text-slate-400'>Quantidade: {data?.stock}</p>
+            <div className='grid grid-cols-2 gap-1 mt-auto'>
                 <button onClick={() => setEditOpen(true)} className='bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600 transition-colors'>Editar</button>
                 <button onClick={() => setOpenDelete(true)} className='bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition-colors'>Deletar</button>
             </div>

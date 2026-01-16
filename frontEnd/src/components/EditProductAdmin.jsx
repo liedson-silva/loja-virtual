@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
 import { useSelector } from 'react-redux';
 
-const EditProductAdmin = ({ close, fetchData, data: productData }) => {
+const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
   const [data, setData] = useState({
     _id: productData._id,
     name: productData.name,
@@ -39,16 +39,19 @@ const EditProductAdmin = ({ close, fetchData, data: productData }) => {
     e.preventDefault();
     try {
       setLoading(true);
-      
+
       const response = await Axios({
         ...SummaryApi.updateProduct,
         data: data
       });
+
       const { data: responseData } = response;
       if (responseData.success) {
         toast.success(responseData.message);
         close();
-        fetchData();
+        if (fetchProductData) {
+          await fetchProductData();
+        }
       }
     } catch (error) {
       AxiosToastError(error);
@@ -102,8 +105,8 @@ const EditProductAdmin = ({ close, fetchData, data: productData }) => {
   };
 
   return (
-    <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-      <div className='bg-blue-100 max-w-4xl w-full p-4 rounded'>
+    <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center z-50'>
+      <div className='bg-blue-100 max-w-4xl w-full p-4 rounded-lg max-h-[90vh] overflow-y-auto scrollbar-custom'>
         <div className='flex items-center justify-between'>
           <h1 className='font-bold'>Atualizar produto</h1>
           <button onClick={close} className='w-fit block ml-auto'>
@@ -275,55 +278,57 @@ const EditProductAdmin = ({ close, fetchData, data: productData }) => {
               </label>
             </div>
           </div>
-          <div className='grid gap-1'>
-            <label htmlFor="productUnit" className="flex gap-1 font-semibold">Unidade:</label>
-            <input
-              type="text"
-              id="productUnit"
-              placeholder='Digite a unidade do produto'
-              value={data.unit}
-              name="unit"
-              onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
-            />
-          </div>
-          <div className='grid gap-1'>
-            <label htmlFor="productStock" className="flex gap-1 font-semibold">Quantidade em estoque:</label>
-            <input
-              type="text"
-              id="productStock"
-              placeholder='Digite a quantidade em estoque do produto'
-              value={data.stock}
-              name="stock"
-              onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
-            />
-          </div>
-          <div className='grid gap-1'>
-            <label htmlFor="productPrice" className="flex gap-1 font-semibold">Preço:</label>
-            <input
-              type="text"
-              id="productPrice"
-              placeholder='Digite o preço do produto'
-              value={data.price}
-              name="price"
-              onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
-            />
-          </div>
-          <div className='grid gap-1'>
-            <label htmlFor="productDiscount" className="flex gap-1 font-semibold">Desconto:</label>
-            <input
-              type="text"
-              id="productDiscount"
-              placeholder='Digite o desconto do produto'
-              value={data.discount}
-              name="discount"
-              onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
-            />
-          </div>
 
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+            <div>
+              <label htmlFor="productUnit" className="flex gap-1 font-semibold">Unidade:</label>
+              <input
+                type="text"
+                id="productUnit"
+                placeholder='Digite a unidade do produto'
+                value={data.unit}
+                name="unit"
+                onChange={handleOnChange}
+                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              />
+            </div>
+            <div>
+              <label htmlFor="productStock" className="flex gap-1 font-semibold">Quantidade em estoque:</label>
+              <input
+                type="text"
+                id="productStock"
+                placeholder='Digite a quantidade em estoque do produto'
+                value={data.stock}
+                name="stock"
+                onChange={handleOnChange}
+                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              />
+            </div>
+            <div>
+              <label htmlFor="productPrice" className="flex gap-1 font-semibold">Preço:</label>
+              <input
+                type="text"
+                id="productPrice"
+                placeholder='Digite o preço do produto'
+                value={data.price}
+                name="price"
+                onChange={handleOnChange}
+                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              />
+            </div>
+            <div>
+              <label htmlFor="productDiscount" className="flex gap-1 font-semibold">Desconto:</label>
+              <input
+                type="text"
+                id="productDiscount"
+                placeholder='Digite o desconto do produto'
+                value={data.discount}
+                name="discount"
+                onChange={handleOnChange}
+                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              />
+            </div>
+          </div>
           <button
             className={`
                             ${data.name && data.image

@@ -67,8 +67,8 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
                 <h3 className='font-semibold text-lg md:text-xl'>{name}</h3>
                 <Link to={handleRedirectProductListpage()} className='text-sm text-blue-600 hover:underline'>Ver tudo</Link>
             </div>
-            <div className='relative flex items-center'>
-                <div className='flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth'>
+            <div className='relative flex items-center'> 
+                <div ref={containerRef} className='flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth'>
                     {loading &&
                         loadingCardNumber.map((_, index) => {
                             return (

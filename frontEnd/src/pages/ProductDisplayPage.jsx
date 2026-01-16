@@ -34,7 +34,7 @@ const ProductDisplayPage = () => {
 
             const { data: responseData } = response;
             if (responseData.success) {
-                setData(responseData.data);
+                setData(responseData.data[0]);
             }
         } catch (error) {
             AxiosToastError(error);
@@ -93,14 +93,6 @@ const ProductDisplayPage = () => {
                 </div>
 
                 <div className='my-4 hidden lg:grid gap-3'>
-                    <div>
-                        <p className='font-semibold'>Descrição</p>
-                        <p className='text-base'>{data.description}</p>
-                    </div>
-                    <div>
-                        <p className='font-semibold'>Unidades</p>
-                        <p className='text-base'>{data.units}</p>
-                    </div>
                     {data?.more_details && Object.keys(data?.more_details).map((element, index) => {
                         return (
                             <div>
@@ -114,9 +106,8 @@ const ProductDisplayPage = () => {
 
             <div>
                 <div className='p-4 lg:pl-7 text-base lg:text-lg'>
-                    <p className='bg-green-300 w-fit px-2 rounded-full'>10</p>
                     <h2 className='text-lg font-semibold lg:text-3xl'>{data.name}</h2>
-                    <p>{data.unit}</p>
+                    <p>Quantidade: {data.stock}</p>
                     <hr />
                     <div>
                         <p>Preço</p>
@@ -128,7 +119,7 @@ const ProductDisplayPage = () => {
                                 <p className='line-through'>{DisplayPriceInBRL(data.price)}</p>
                             )}
                             {data.discount && (
-                                <p className='font-bold text-green-600 lg:text-2xl'>{data.discount}% <span className='text-base text-neutral-600'>off</span></p>
+                                <p className='font-bold text-green-600 lg:text-2xl'>{data.discount}% OFF</p>
                             )}
                         </div>
                     </div>
@@ -184,7 +175,7 @@ const ProductDisplayPage = () => {
                         </div>
                         <div>
                             <p className='font-semibold'>Unidades</p>
-                            <p className='text-base'>{data.units}</p>
+                            <p className='text-base'>{data.unit}</p>
                         </div>
                         {data?.more_details && Object.keys(data?.more_details).map((element, index) => {
                             return (

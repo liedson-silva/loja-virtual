@@ -55,18 +55,15 @@ const ProductListPage = () => {
   }, [params]);
 
   useEffect(() => {
-    const sub = AllSubCategory.find(s => {
-      const filterData = s.category.some(el => {
-        return el._id == categoryId;
-      })
-      return filterData ? filterData : null;
-    })
+    const sub = AllSubCategory.filter(s => {
+      return s.category.some(el => el._id === categoryId);
+    });
     setDisplaySubCategory(sub);
-  }, [AllSubCategory, params]);
+  }, [AllSubCategory, categoryId]);
 
   return (
-    <section className='sticky top-24 lg:top-20'>
-      <div className='container sticky top-24 mx-auto grid grid-cols-[90px, 1fr] md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr] '>
+    <section className='container mx-auto'>
+      <div className='container mx-auto grid grid-cols-2 md:grid-cols-3  lg:grid-cols-4'>
         {displaySubCategory.map((s, index) => {
           const link = `/${valideUrlConvert(s?.category[0]?.name)}-${s?.category[0]?._id}/${valideUrlConvert(s?.name)}-${s?._id}`;
           return (

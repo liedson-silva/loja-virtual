@@ -68,7 +68,7 @@ const Register = () => {
                     <p className="font-semibold">Formulário de Cadastro</p>
                     <form className='grid gap-4 py-4' onSubmit={handleSubmit}>
                         <div className='grid gap-1'>
-                            <label htmlFor="name">Nome:</label>
+                            <label htmlFor="name" className='font-semibold'>Nome:</label>
                             <input
                                 type="text"
                                 id="name"
@@ -81,7 +81,7 @@ const Register = () => {
                             />
                         </div>
                         <div className='grid gap-1'>
-                            <label htmlFor="email">Email:</label>
+                            <label htmlFor="email" className='font-semibold'>Email:</label>
                             <input
                                 type="email"
                                 id="email"
@@ -93,7 +93,7 @@ const Register = () => {
                             />
                         </div>
                         <div className='grid gap-1'>
-                            <label htmlFor="password">Senha:</label>
+                            <label htmlFor="password" className='font-semibold'>Senha:</label>
                             <div className="bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-100">
                                 <input
                                     type={showPassword ? "text" : "password"}
@@ -110,7 +110,7 @@ const Register = () => {
                             </div>
                         </div>
                         <div className='grid gap-1'>
-                            <label htmlFor="confirmPassword">Confirme a senha:</label>
+                            <label htmlFor="confirmPassword" className='font-semibold'>Confirme a senha:</label>
                             <div className="bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-100">
                                 <input
                                     type={showConfirmPassword ? "text" : "password"}
