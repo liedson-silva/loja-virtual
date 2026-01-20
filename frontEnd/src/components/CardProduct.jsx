@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { valideUrlConvert } from '../utils/valideUrlConvert';
 import { Link } from 'react-router-dom';
 import { pricewithDiscount } from '../utils/pricewithDiscount';
-import AddToCardButton from './AddToCardButton';
 import { DisplayPriceInBRL } from '../utils/DisplayPriceInBRL';
 
 
@@ -35,7 +34,9 @@ const CardProduct = ({ data }) => {
                     {data.stock == 0 ? (
                         <p className='text-red-500 text-sm text-center'>Fora de estoque</p>
                     ) : (
-                        <AddToCardButton data={data} />
+                        <button className='bg-green-500 text-white lg:px-2 lg:py-1 rounded hover:bg-green-600 transition'>
+                            Adicionar
+                        </button>
                     )}
                 </div>
             </div>

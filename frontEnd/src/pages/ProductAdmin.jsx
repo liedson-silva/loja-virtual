@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
-import { IoSearchOutline } from 'react-icons/io5';
 import ProductCardAdmin from '../components/ProductCardAdmin';
 import Loading from '../components/Loading';
+import UploadProduct from '../components/UploadProduct';
 
 const ProductAdmin = () => {
   const [productData, setProductData] = useState([]);
@@ -12,6 +12,7 @@ const ProductAdmin = () => {
   const [loading, setLoading] = useState(false);
   const [totalPageCount, setTotalPageCount] = useState(1);
   const [search, setSearch] = useState('');
+  const [openUploadProduct, setOpenUploadProduct] = useState(false);
 
   const fetchProductData = async () => {
     try {
@@ -28,6 +29,7 @@ const ProductAdmin = () => {
       const { data: responseData } = response;
       if (responseData.success) {
         setProductData(responseData.data);
+        setTotalPageCount(responseData.totalNoPage);
       }
     } catch (error) {
       AxiosToastError(error);
@@ -52,12 +54,6 @@ const ProductAdmin = () => {
     }
   }
 
-  const handleOnChange = (e) => {
-    const { value } = e.target;
-    setSearch(value);
-    setPage(1);
-  }
-
   useEffect(() => {
     let flag = true;
 
@@ -76,16 +72,11 @@ const ProductAdmin = () => {
     <section>
       <div className='p-4 bg-blue-50 rounded shadow-md flex items-center justify-between'>
         <h2 className='font-semibold'>Produto</h2>
-        <div className='h-full min-w-24 max-w-56 w-full ml-auto bg-white px-4 flex items-center gap-3 py-2 rounded border focus-within:border-primary-100'>
-          <IoSearchOutline size={15} />
-          <input
-            type="text"
-            placeholder='Pesquisar produto...'
-            className='w-full h-full outline-none bg-transparent'
-            value={search}
-            onChange={handleOnChange}
-          />
-        </div>
+        <button
+          onClick={() => setOpenUploadProduct(!openUploadProduct)}
+          className='text-sm font-bold text-white min-w-20 border px-3 py-1 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'>
+          Adicionar
+        </button>
       </div>
 
       {loading && (<Loading />)}
@@ -107,6 +98,14 @@ const ProductAdmin = () => {
           <button onClick={handleNext} className='text-sm font-bold text-white min-w-20 border px-4 py-2 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'>Próximo</button>
         </div>
       </div>
+
+      {openUploadProduct && (
+        <UploadProduct
+          fetchProductData={fetchProductData}
+          close={() => setOpenUploadProduct(false)}
+        />
+      )}
+      
     </section>
   )
 }

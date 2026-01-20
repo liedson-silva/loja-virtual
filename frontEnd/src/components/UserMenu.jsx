@@ -68,12 +68,6 @@ const UserMenu = ({ close }) => {
                         </Link>
                         <Link
                             onClick={handleClose}
-                            to={"/dashboard/upload-product"}
-                            className='hover:text-primary-100'>
-                            Carregar Produto
-                        </Link>
-                        <Link
-                            onClick={handleClose}
                             to={"/dashboard/product-admin"}
                             className='hover:text-primary-100'>
                             Produto

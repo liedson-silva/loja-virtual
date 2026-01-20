@@ -47,10 +47,7 @@ const Login = () => {
                 localStorage.setItem("refreshToken", response.data.data.refreshToken);
 
                 const userDetails = await fetchUserDetails();
-                
-                if (userDetails?.data) {
-                    dispatch(setUserDetails(userDetails.data));
-                }
+                dispatch(setUserDetails(userDetails.data));
 
                 setData({
                     email: '',

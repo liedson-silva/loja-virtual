@@ -13,6 +13,7 @@ import categoryRouter from './routes/category.route.js';
 import uploadRouter from './routes/upload.route.js';
 import SubCategoryRouter from './routes/subCategory.route.js';
 import productRouter from './routes/product.route.js';
+import cartProductRouter from './routes/cartproduct.route.js';
 
 const app = express();
 app.use(cors({
@@ -33,6 +34,7 @@ app.use('/category', categoryRouter);
 app.use('/file', uploadRouter);
 app.use('/subcategory', SubCategoryRouter);
 app.use('/product', productRouter);
+app.use('/cartproduct', cartProductRouter);
 
 const PORT = 3000 || process.env.PORT;
 connectDB().then(() => {

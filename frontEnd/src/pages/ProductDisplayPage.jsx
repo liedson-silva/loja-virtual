@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { DisplayPriceInBRL } from '../utils/DisplayPriceInBRL';
 import { pricewithDiscount } from '../utils/pricewithDiscount';
-import AddToCardButton from '../components/AddToCardButton';
 import image1 from '../assets/delivery.png';
 import image2 from '../assets/best-price.png';
 import image3 from '../assets/assortment.png';
@@ -107,11 +106,9 @@ const ProductDisplayPage = () => {
             <div>
                 <div className='p-4 lg:pl-7 text-base lg:text-lg'>
                     <h2 className='text-lg font-semibold lg:text-3xl'>{data.name}</h2>
-                    <p>Quantidade: {data.stock}</p>
                     <hr />
                     <div>
-                        <p>Preço</p>
-                        <div className='flex items-center gap-2 lg:gap-4'>
+                        <div className='flex items-center gap-2 lg:gap-4 mt-2'>
                             <div className='border border-green-600 px-4 py-2 rounded bg-green-50 w-fit'>
                                 <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInBRL(pricewithDiscount(data.price, data.discount))}</p>
                             </div>
@@ -127,7 +124,9 @@ const ProductDisplayPage = () => {
                         <p className='text-red-500 text-lg my-2'>Fora de estoque</p>
                     ) : (
                         <div className='my-4'>
-                            <AddToCardButton data={data} />
+                            <button className='bg-green-500 text-white lg:px-2 lg:py-1 rounded hover:bg-green-600 transition'>
+                                Adicionar
+                            </button>
                         </div>
                     )}
 
@@ -170,12 +169,16 @@ const ProductDisplayPage = () => {
 
                     <div className='my-4 lg:grid gap-3'>
                         <div>
-                            <p className='font-semibold'>Descrição</p>
-                            <p className='text-base'>{data.description}</p>
+                            <p className='font-semibold'>Quantidade</p>
+                            <p className='text-base'>{data.stock}</p>
                         </div>
                         <div>
-                            <p className='font-semibold'>Unidades</p>
+                            <p className='font-semibold'>Unidade</p>
                             <p className='text-base'>{data.unit}</p>
+                        </div>
+                        <div>
+                            <p className='font-semibold'>Descrição</p>
+                            <p className='text-base'>{data.description}</p>
                         </div>
                         {data?.more_details && Object.keys(data?.more_details).map((element, index) => {
                             return (

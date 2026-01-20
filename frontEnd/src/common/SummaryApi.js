@@ -1,4 +1,4 @@
-export const baseUrl = 'https://loja-virtual-phi-lyart.vercel.app';
+export const baseUrl = 'http://localhost:3000';
 
 const SummaryApi = {
     register: {
