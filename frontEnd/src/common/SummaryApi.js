@@ -1,4 +1,4 @@
-export const baseUrl = 'https://loja-virtual-liedson.vercel.app';
+export const baseUrl = 'https://loja-virtual-phi-lyart.vercel.app';
 
 const SummaryApi = {
     register: {
