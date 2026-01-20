@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:3000';
+export const baseUrl = 'https://loja-virtual-liedson.vercel.app';
 
 const SummaryApi = {
     register: {
