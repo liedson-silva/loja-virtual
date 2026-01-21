@@ -18,7 +18,8 @@ import cartProductRouter from './routes/cartproduct.route.js';
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL
+    origin: process.env.FRONTEND_URL,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(cookieParser());
