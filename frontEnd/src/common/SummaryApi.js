@@ -1,4 +1,4 @@
-export const baseUrl = 'https://loja-virtual-phi-lyart.vercel.app';
+export const baseUrl = 'http://localhost:3000';
 
 const SummaryApi = {
     register: {
@@ -104,6 +104,22 @@ const SummaryApi = {
     getProductDetails: {
         url: '/product/get-product-details',
         method: 'post',
+    },
+    addToCart: {
+        url: '/cartproduct/add-item-to-cart',
+        method: 'post',
+    },
+    getCartItem: {
+        url: '/cartproduct/get-items-in-cart',
+        method: 'get',
+    },
+    updateCartItem: {
+        url: '/cartproduct/update-cart-item',
+        method: 'put',
+    },
+    deleteCartItem: {
+        url: '/cartproduct/delete-cart-item',
+        method: 'delete',
     },
 }
 

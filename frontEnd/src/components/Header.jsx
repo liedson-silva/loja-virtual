@@ -74,14 +74,14 @@ const Header = () => {
                             </button>
                         )}
 
-                        <button className='flex items-center gap-2 bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 px-3 py-2 rounded text-white hover:opacity-90'>
+                        <Link to="/cart" className='flex items-center gap-2 bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 px-3 py-2 rounded text-white hover:opacity-90'>
                             <div>
                                 <BsCart4 size={25} />
                             </div>
                             <div className='font-semibold text-sm '>
                                 <p>Carrinho</p>
                             </div>
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { DisplayPriceInBRL } from '../utils/DisplayPriceInBRL';
 import { pricewithDiscount } from '../utils/pricewithDiscount';
 import image1 from '../assets/delivery.png';
 import image2 from '../assets/best-price.png';
 import image3 from '../assets/assortment.png';
+import toast from 'react-hot-toast';
 
 const ProductDisplayPage = () => {
     const params = useParams();
@@ -39,6 +40,20 @@ const ProductDisplayPage = () => {
             AxiosToastError(error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleAddToCart = async (e) => {
+        try {
+            const response = await Axios({
+                ...SummaryApi.addToCart,
+                data: { productId: productId, quantity: 1 }
+            });
+            if (response.data.success) {
+                toast.success(response.data.message);
+            }
+        } catch (error) {
+            AxiosToastError(error);
         }
     };
 
@@ -124,9 +139,9 @@ const ProductDisplayPage = () => {
                         <p className='text-red-500 text-lg my-2'>Fora de estoque</p>
                     ) : (
                         <div className='my-4'>
-                            <button className='bg-green-500 text-white lg:px-2 lg:py-1 rounded hover:bg-green-600 transition'>
+                            <Link to="/cart" onClick={handleAddToCart} className='bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 transition'>
                                 Adicionar
-                            </button>
+                            </Link>
                         </div>
                     )}
 

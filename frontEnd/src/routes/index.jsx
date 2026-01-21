@@ -18,6 +18,7 @@ import ProductAdmin from "../pages/ProductAdmin";
 import AdminPermision from "../layouts/AdminPermision";
 import ProductListPage from "../pages/ProductListPage";
 import ProductDisplayPage from "../pages/ProductDisplayPage";
+import CartProduct from "../pages/CartProduct";
 
 const router = createBrowserRouter([
     {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
         {
             path: ":category/:subCategory",
             element: <ProductListPage />
+        },
+        {
+            path: "/cart",
+            element: <CartProduct />
         },
         ]
     },

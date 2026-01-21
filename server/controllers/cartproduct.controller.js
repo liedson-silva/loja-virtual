@@ -13,11 +13,24 @@ export const AddItemToCart = async (req, res) => {
             });
         }
 
+        const existingCartItem = await CartProductModel.findOne({ userId, productId });
+        if (existingCartItem) {
+            existingCartItem.quantity += quantity;
+            const updatedItem = await existingCartItem.save();
+            return res.json({
+                message: 'Quantidade do item no carrinho atualizada com sucesso.',
+                data: updatedItem,
+                success: true,
+                error: false
+            });
+        }
+        
+
         const AddCartItem = new CartProductModel({ userId, productId, quantity });
         const saveCartItem = await AddCartItem.save()
 
         return res.json({
-            message: 'Item adicionado ao carrinho com sucesso.',
+            message: 'Adicionado ao carrinho com sucesso.',
             data: saveCartItem,
             success: true,
             error: false
@@ -35,7 +48,7 @@ export const GetItemsInCart = async (req, res) => {
     try {
         const userId = req.userId;
 
-        const cartItems = await CartProductModel.find({ userId }).populate('product');
+        const cartItems = await CartProductModel.find({ userId }).populate('productId');
 
         return res.json({
             data: cartItems,
@@ -108,7 +121,7 @@ export const RemoveItemFromCart = async (req, res) => {
         }
 
         return res.json({
-            message: "Item removido do carrinho com sucesso.",
+            message: "Removido do carrinho com sucesso.",
             data: deletedItem,
             success: true,
             error: false

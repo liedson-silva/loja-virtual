@@ -10,10 +10,6 @@ const ProductCardAdmin = ({ data, fetchProductData }) => {
     const [editOpen, setEditOpen] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
 
-    const handleDeleteCancel = () => {
-        setOpenDelete(false);
-    }
-
     const handleDelete = async () => {
         try {
             const response = await Axios({
