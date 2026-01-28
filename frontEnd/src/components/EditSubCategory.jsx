@@ -5,7 +5,6 @@ import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import { IoClose } from "react-icons/io5";
-import { FaAsterisk } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const EditSubCategory = ({ close, data, fetchData }) => {
@@ -95,7 +94,7 @@ const EditSubCategory = ({ close, data, fetchData }) => {
                 </div>
                 <form onSubmit={handleSubmitSubCategory} className='my-3 grid gap-2'>
                     <div className='grid gap-1'>
-                        <label htmlFor="name" className="flex gap-1 font-semibold">Nome: <FaAsterisk className='size-2 text-red-500' /></label>
+                        <label htmlFor="name" className="flex gap-1 font-semibold">Nome: </label>
                         <input
                             type="text"
                             id='name'
@@ -103,13 +102,14 @@ const EditSubCategory = ({ close, data, fetchData }) => {
                             value={subCategoryData.name}
                             name='name'
                             onChange={handleChange}
-                            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
+                            required
                         />
                     </div>
                     <div className='grid gap-1'>
-                        <p className="flex gap-1 font-semibold">Foto: <FaAsterisk className='size-2 text-red-500' /></p>
+                        <p className="flex gap-1 font-semibold">Foto: </p>
                         <div className='flex gap-4 flex-col lg:flex-row items-center'>
-                            <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
+                            <div className='border-2 border-dashed border-blue-300 bg-blue-50 h-32 w-32 flex items-center justify-center rounded-2xl overflow-hidden'>
                                 {subCategoryData.image ? (
                                     <img
                                         alt='Subcategory'
@@ -121,14 +121,14 @@ const EditSubCategory = ({ close, data, fetchData }) => {
                                 )}
                             </div>
                             <label htmlFor="uploadSubCategoryImage">
-                                <div
-                                    className={`
-                                                ${subCategoryData.name
-                                            ? 'text-sm cursor-pointer font-bold text-white min-w-20 border px-3 py-1 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
-                                            : 'text-sm bg-gray-500 text-white px-3 py-1 rounded-full font-bold'
-                                        }
-                                                `}>
-                                    Carregar Foto
+                                <div className={`
+                                                        text-center text-xs px-6 py-2 rounded-full font-bold transition-all shadow-sm
+                                                        ${data.name
+                                        ? 'cursor-pointer text-white bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
+                                        : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                                    }
+                                                    `}>
+                                    {data.image ? "Alterar Imagem" : "Carregar Foto"}
                                 </div>
                                 <input
                                     disabled={!subCategoryData.name}

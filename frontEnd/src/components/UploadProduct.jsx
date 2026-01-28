@@ -127,7 +127,7 @@ const UploadProduct = ({ close, fetchProductData }) => {
                 });
             }
             close();
-            if(fetchProductData){
+            if (fetchProductData) {
                 fetchProductData();
             }
         } catch (error) {
@@ -136,17 +136,18 @@ const UploadProduct = ({ close, fetchProductData }) => {
     };
 
     return (
-        <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center z-50'>
-            <div className='bg-blue-100 max-w-4xl w-full p-4 rounded-lg max-h-[90vh] overflow-y-auto scrollbar-custom'>
-                <div className='flex items-center justify-between'>
+        <section className='fixed inset-0 z-50 p-4 bg-neutral-800/60 backdrop-blur-sm flex items-center justify-center'>
+            <div className='bg-blue-100 max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-custom'>
+                
+                <div className='flex items-center justify-between p-4 border-b border-blue-200 bg-blue-100'>
                     <h1 className='font-bold'>Novo Produto</h1>
                     <button onClick={close} className='w-fit block ml-auto'>
                         <IoClose size={25} />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit} className='my-3 grid gap-2'>
+                <form onSubmit={handleSubmit} className='my-3 grid gap-4 p-6'>
                     <div className='grid gap-1'>
-                        <label htmlFor="productName" className="flex gap-1 font-semibold">Nome: </label>
+                        <label htmlFor="productName" className="flex gap-1 font-semibold text-gray-700 text-sm">Nome: </label>
                         <input
                             type="text"
                             id="productName"
@@ -154,11 +155,11 @@ const UploadProduct = ({ close, fetchProductData }) => {
                             value={data.name}
                             name="name"
                             onChange={handleOnChange}
-                            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                         />
                     </div>
                     <div className='grid gap-1'>
-                        <label htmlFor="productDescription" className="flex gap-1 font-semibold">Descrição:</label>
+                        <label htmlFor="productDescription" className="flex gap-1 font-semibold text-gray-700 text-sm   ">Descrição:</label>
                         <input
                             type="text"
                             id="productDescription"
@@ -166,18 +167,18 @@ const UploadProduct = ({ close, fetchProductData }) => {
                             value={data.description}
                             name="description"
                             onChange={handleOnChange}
-                            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                         />
                     </div>
                     <div className="grid gap-1">
-                        <label className="flex gap-1 font-semibold ">Selecione a Categoria</label>
+                        <label className="flex gap-1 font-semibold text-gray-700 text-sm">Selecione a Categoria</label>
                         <div className="border focus-within:border-primary-100 rounded ">
                             <div className="flex flex-wrap gap-2">
                                 {data.category.map((cat, index) => {
                                     return (
                                         <p
                                             key={cat._id + "selectedValue"}
-                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 "
+                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 text-gray-700 text-sm"
                                         >
                                             {cat.name}
                                             <div
@@ -223,14 +224,14 @@ const UploadProduct = ({ close, fetchProductData }) => {
                         </div>
                     </div>
                     <div className="grid gap-1">
-                        <label className="flex gap-1 font-semibold ">Selecione a Sub categoria</label>
+                        <label className="flex gap-1 font-semibold text-gray-700 text-sm">Selecione a Sub categoria</label>
                         <div className="border focus-within:border-primary-100 rounded ">
                             <div className="flex flex-wrap gap-2">
                                 {data.subCategory.map((cat, index) => {
                                     return (
                                         <p
                                             key={cat._id + "selectedValue"}
-                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 "
+                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 text-gray-700 text-sm"
                                         >
                                             {cat.name}
                                             <div
@@ -276,11 +277,11 @@ const UploadProduct = ({ close, fetchProductData }) => {
                         </div>
                     </div>
                     <div>
-                        <p className="font-semibold">Foto:</p>
+                        <p className="font-semibold text-gray-700 text-sm">Foto:</p>
                         <div>
                             <label
                                 htmlFor="productImage"
-                                className="bg-blue-50 h-24 w-44 border rounded flex items-center justify-center cursor-pointer"
+                                className='border-2 border-dashed border-blue-300 bg-blue-50 h-32 w-32 flex items-center justify-center rounded-2xl overflow-hidden cursor-pointer'
                             >
                                 <div className="text-center flex items-center justify-center flex-col">
                                     {imageLoading ? (
@@ -328,58 +329,54 @@ const UploadProduct = ({ close, fetchProductData }) => {
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
                         <div>
-                            <label htmlFor="productUnit" className="flex gap-1 font-semibold">Unidade:</label>
+                            <label htmlFor="productUnit" className="flex gap-1 font-semibold text-gray-700 text-sm">Unidade:</label>
                             <input
                                 type="text"
                                 id="productUnit"
-                                placeholder='Digite a unidade do produto'
                                 value={data.unit}
                                 name="unit"
-                                onChange={handleOnChange}
-                                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                                onChange={handleOnChange} 
+                                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                             />
                         </div>
                         <div>
-                            <label htmlFor="productStock" className="flex gap-1 font-semibold">Quantidade em estoque:</label>
+                            <label htmlFor="productStock" className="flex gap-1 font-semibold text-gray-700 text-sm">Quantidade:</label>
                             <input
                                 type="text"
                                 id="productStock"
-                                placeholder='Digite a quantidade em estoque do produto'
                                 value={data.stock}
                                 name="stock"
                                 onChange={handleOnChange}
-                                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                             />
                         </div>
                         <div>
-                            <label htmlFor="productPrice" className="flex gap-1 font-semibold">Preço:</label>
+                            <label htmlFor="productPrice" className="flex gap-1 font-semibold text-gray-700 text-sm">Preço:</label>
                             <input
                                 type="text"
                                 id="productPrice"
-                                placeholder='Digite o preço do produto'
                                 value={data.price}
                                 name="price"
                                 onChange={handleOnChange}
-                                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                             />
                         </div>
                         <div>
-                            <label htmlFor="productDiscount" className="flex gap-1 font-semibold">Desconto:</label>
+                            <label htmlFor="productDiscount" className="flex gap-1 font-semibold text-gray-700 text-sm">Desconto:</label>
                             <input
                                 type="text"
                                 id="productDiscount"
-                                placeholder='Digite o desconto do produto'
                                 value={data.discount}
                                 name="discount"
                                 onChange={handleOnChange}
-                                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                             />
                         </div>
                     </div>
                     {Object.keys(data?.more_details)?.map((k, index) => {
                         return (
                             <div className="grid gap-1">
-                                <label htmlFor={k} className="font-semibold">{k}</label>
+                                <label htmlFor={k} className="font-semibold text-gray-700 text-sm">{k}</label>
                                 <input
                                     type="text"
                                     id={k}
@@ -397,7 +394,7 @@ const UploadProduct = ({ close, fetchProductData }) => {
                                         });
                                     }}
                                     required
-                                    className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                                    className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100 text-gray-700 text-sm'
                                 />
                             </div>
                         )

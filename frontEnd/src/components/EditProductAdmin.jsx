@@ -105,15 +105,16 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
   };
 
   return (
-    <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center z-50'>
-      <div className='bg-blue-100 max-w-4xl w-full p-4 rounded-lg max-h-[90vh] overflow-y-auto scrollbar-custom'>
-        <div className='flex items-center justify-between'>
+    <section className='fixed inset-0 z-50 p-4 bg-neutral-800/60 backdrop-blur-sm flex items-center justify-center'>
+      <div className='bg-blue-100 max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-custom'>
+
+        <div className='flex items-center justify-between p-4 border-b border-blue-200 bg-blue-100'>
           <h1 className='font-bold'>Atualizar produto</h1>
           <button onClick={close} className='w-fit block ml-auto'>
             <IoClose size={25} />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className='my-3 grid gap-2'>
+        <form onSubmit={handleSubmit} className='my-3 grid gap-4 p-6'>
           <div className='grid gap-1'>
             <label htmlFor="productName" className="flex gap-1 font-semibold">Nome: </label>
             <input
@@ -123,7 +124,7 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
               value={data.name}
               name="name"
               onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
             />
           </div>
           <div className='grid gap-1'>
@@ -135,7 +136,7 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
               value={data.description}
               name="description"
               onChange={handleOnChange}
-              className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+              className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
             />
           </div>
           <div className="grid gap-1">
@@ -285,23 +286,21 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
               <input
                 type="text"
                 id="productUnit"
-                placeholder='Digite a unidade do produto'
                 value={data.unit}
                 name="unit"
                 onChange={handleOnChange}
-                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
               />
             </div>
             <div>
-              <label htmlFor="productStock" className="flex gap-1 font-semibold">Quantidade em estoque:</label>
+              <label htmlFor="productStock" className="flex gap-1 font-semibold">Quantidade:</label>
               <input
                 type="text"
                 id="productStock"
-                placeholder='Digite a quantidade em estoque do produto'
                 value={data.stock}
                 name="stock"
                 onChange={handleOnChange}
-                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
               />
             </div>
             <div>
@@ -309,11 +308,10 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
               <input
                 type="text"
                 id="productPrice"
-                placeholder='Digite o preço do produto'
                 value={data.price}
                 name="price"
                 onChange={handleOnChange}
-                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
               />
             </div>
             <div>
@@ -321,11 +319,10 @@ const EditProductAdmin = ({ close, fetchProductData, data: productData }) => {
               <input
                 type="text"
                 id="productDiscount"
-                placeholder='Digite o desconto do produto'
                 value={data.discount}
                 name="discount"
                 onChange={handleOnChange}
-                className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
               />
             </div>
           </div>

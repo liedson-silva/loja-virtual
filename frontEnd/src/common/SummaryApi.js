@@ -121,6 +121,14 @@ const SummaryApi = {
         url: '/cartproduct/delete-cart-item',
         method: 'delete',
     },
+    createOrder: {
+        url: '/order/create-order',
+        method: 'post',
+    },
+    getOrdersByUser: {
+        url: '/order/get-orders-by-user',
+        method: 'get',
+    },
 }
 
 export default SummaryApi;

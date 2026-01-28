@@ -91,16 +91,16 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
 
     return (
         <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-            <div className='bg-blue-100 max-w-4xl w-full p-4 rounded'>
-                <div className='flex items-center justify-between'>
+            <div className='bg-blue-100 max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden'>
+                <div className='flex items-center justify-between p-4 border-b border-blue-200 bg-blue-100'>
                     <h1 className='font-bold'>Nova Sub Categoria</h1>
                     <button onClick={handleClose} className='w-fit block ml-auto'>
                         <IoClose size={25} />
                     </button>
                 </div>
-                <form onSubmit={handleSubmitSubCategory} className='my-3 grid gap-2'>
+                <form onSubmit={handleSubmitSubCategory} className='my-3 grid gap-4 p-6'>
                     <div className='grid gap-1'>
-                        <label htmlFor="name" className="flex gap-1 font-semibold">Nome: <FaAsterisk className='size-2 text-red-500' /></label>
+                        <label htmlFor="name" className="flex gap-1 font-semibold text-gray-700 text-sm">Nome: <FaAsterisk className='size-2 text-red-500' /></label>
                         <input
                             type="text"
                             id='name'
@@ -108,13 +108,13 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
                             value={subCategoryData.name}
                             name='name'
                             onChange={handleChange}
-                            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+                            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
                         />
                     </div>
                     <div className='grid gap-1'>
-                        <p className="flex gap-1 font-semibold">Foto: <FaAsterisk className='size-2 text-red-500' /></p>
+                        <p className="flex gap-1 font-semibold text-gray-700 text-sm">Foto: <FaAsterisk className='size-2 text-red-500' /></p>
                         <div className='flex gap-4 flex-col lg:flex-row items-center'>
-                            <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
+                            <div className='border-2 border-dashed border-blue-300 bg-blue-50 h-32 w-32 flex items-center justify-center rounded-2xl overflow-hidden'>
                                 {subCategoryData.image ? (
                                     <img
                                         alt='Subcategory'
@@ -126,14 +126,14 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
                                 )}
                             </div>
                             <label htmlFor="uploadSubCategoryImage">
-                                <div
-                                    className={`
-                                            ${subCategoryData.name
-                                            ? 'text-sm cursor-pointer font-bold text-white min-w-20 border px-3 py-1 rounded-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
-                                            : 'text-sm bg-gray-500 text-white px-3 py-1 rounded-full font-bold'
-                                        }
-                                            `}>
-                                    Carregar Foto
+                               <div className={`
+                                    text-center text-xs px-6 py-2 rounded-full font-bold transition-all shadow-sm
+                                    ${subCategoryData.name
+                                        ? 'cursor-pointer text-white bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 hover:opacity-90'
+                                        : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                                    }
+                                `}>
+                                    {subCategoryData.image ? "Alterar Imagem" : "Carregar Foto"}
                                 </div>
                                 <input
                                     disabled={!subCategoryData.name}
@@ -147,14 +147,14 @@ const UploadSubCategoryModel = ({ fetchData, closeModal }) => {
                     </div>
 
                     <div className="grid gap-1">
-                        <label className="flex gap-1 font-semibold ">Selecione a Categoria</label>
+                        <label className="flex gap-1 font-semibold text-gray-700 text-sm">Selecione a Categoria</label>
                         <div className="border focus-within:border-primary-100 rounded ">
                             <div className="flex flex-wrap gap-2">
                                 {subCategoryData.category.map((cat, index) => {
                                     return (
                                         <p
                                             key={cat._id + "selectedValue"}
-                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 "
+                                            className="bg-white shadow-md px-1 m-1 flex items-center gap-2 text-gray-700 text-sm"
                                         >
                                             {cat.name}
                                             <div

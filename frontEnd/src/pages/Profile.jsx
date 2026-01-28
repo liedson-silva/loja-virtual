@@ -80,7 +80,7 @@ const Profile = () => {
           <input type="text"
             id='name'
             placeholder='Digite seu nome:'
-            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
             value={userData.name}
             name='name'
             onChange={handleOnChange}
@@ -92,7 +92,7 @@ const Profile = () => {
           <input type="email"
             id='email'
             placeholder='Digite seu email:'
-            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
             value={userData.email}
             name='email'
             onChange={handleOnChange}
@@ -104,7 +104,7 @@ const Profile = () => {
           <input type="tel"
             id='mobile'
             placeholder='Digite seu telefone:'
-            className='py-2 bg-blue-50 outline-none border rounded hover:border-primary-100'
+            className='w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl focus:border-primary-100 outline-none transition-all placeholder:text-gray-400'
             value={userData.mobile}
             name='mobile'
             onChange={handleOnChange}

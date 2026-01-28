@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
@@ -9,6 +10,7 @@ import { toast } from 'react-hot-toast';
 
 const CartProduct = () => {
     const [productData, setProductData] = useState([]);
+    const navigate = useNavigate();
 
     const subtotal = productData.reduce((acc, curr) => {
         const price = pricewithDiscount(curr.productId?.price, curr.productId?.discount);
@@ -57,6 +59,27 @@ const CartProduct = () => {
             AxiosToastError(error);
         }
     }
+
+    const createOrder = async () => {
+        try {
+            const payload = {
+                addressId: "648b1f4f4f1a2563b8e4d2c1",
+                subTotalAmt: subtotal,
+                totalAmt: subtotal,
+            }
+            const response = await Axios({
+                ...SummaryApi.createOrder,
+                data: payload
+            });
+            if (response.data.success) {
+                toast.success(response.data.message);
+                fetchProductData();
+                navigate('/dashboard/my-orders');
+            }
+        } catch (error) {
+            AxiosToastError(error);
+        }
+    };
 
     useEffect(() => {
         fetchProductData();
@@ -109,7 +132,7 @@ const CartProduct = () => {
                                 <p className='font-semibold'>{DisplayPriceInBRL(subtotal)}</p>
                             </div>
                         </div>
-                        <button className='w-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 text-white py-4 rounded-xl font-bold hover:opacity-90 transition shadow-md'>
+                        <button onClick={createOrder} className='w-full bg-gradient-to-r from-tertiary-100 via-secondary-100 to-primary-100 text-white py-4 rounded-xl font-bold hover:opacity-90 transition shadow-md'>
                             FINALIZAR COMPRA
                         </button>
                     </div>
