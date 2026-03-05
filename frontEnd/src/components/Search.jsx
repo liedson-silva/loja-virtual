@@ -15,7 +15,7 @@ const Search = () => {
 
 
     const redirectToSearchPage = () => {
-        navigate('/search');
+        /*navigate('/search');*/
     }
     return (
         <div className="w-full min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-secondary-100">
@@ -28,11 +28,13 @@ const Search = () => {
                     <div onClick={redirectToSearchPage} className="h-full w-full flex items-center">
                         <TypeAnimation
                             sequence={[
-                                'Pesquisar "leite"',
+                                'Pesquisar.',
                                 1000,
-                                'Pesquisar "arroz"',
+                                'Pesquisar.',
                                 1000,
-                                'Pesquisar "feijão"',
+                                'Pesquisar..',
+                                1000,
+                                'Pesquisar...',
                                 1000,
                             ]}
                             wrapper="span"

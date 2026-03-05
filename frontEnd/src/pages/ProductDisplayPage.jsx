@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { DisplayPriceInBRL } from '../utils/DisplayPriceInBRL';
 import { pricewithDiscount } from '../utils/pricewithDiscount';
@@ -21,6 +21,7 @@ const ProductDisplayPage = () => {
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(0);
     const imageContainer = useRef();
+    const navigate = useNavigate();
 
     const fetchProductDetails = async () => {
         try {
@@ -51,6 +52,7 @@ const ProductDisplayPage = () => {
             });
             if (response.data.success) {
                 toast.success(response.data.message);
+                navigate('/cart');
             }
         } catch (error) {
             AxiosToastError(error);
@@ -134,14 +136,14 @@ const ProductDisplayPage = () => {
                                 <p className='font-bold text-green-600 lg:text-2xl'>{data.discount}% OFF</p>
                             )}
                         </div>
-                    </div>
+                    </div> 
                     {data.stock === 0 ? (
                         <p className='text-red-500 text-lg my-2'>Fora de estoque</p>
                     ) : (
                         <div className='my-4'>
-                            <Link to="/cart" onClick={handleAddToCart} className='bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 transition'>
-                                Adicionar
-                            </Link>
+                            <button onClick={handleAddToCart} className='px-2 bg-green-500 text-white lg:px-2 lg:py-1 rounded hover:bg-green-600 transition'>
+                            Adicionar
+                        </button>
                         </div>
                     )}
 

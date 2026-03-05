@@ -43,8 +43,8 @@ const MyOrders = () => {
         ) : (
           <div>
             {orders.map((order) => (
-              <div key={order._id} className='bg-white border rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden'>
-                <div className='bg-gray-50 p-4 border-b flex flex-wrap justify-between items-center gap-4'>
+              <div key={order._id} className='mb-3 bg-white border rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden'>
+                <div className='bg-gray-100 p-4 border-b flex flex-wrap justify-between items-center gap-4'>
                   <div className='flex gap-8'>
                     <div>
                       <p className='text-[10px] uppercase font-bold text-gray-400 tracking-wider'>Data</p>

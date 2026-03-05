@@ -15,6 +15,7 @@ import SubCategoryRouter from './routes/subCategory.route.js';
 import productRouter from './routes/product.route.js';
 import cartProductRouter from './routes/cartproduct.route.js';
 import orderRouter from './routes/order.route.js';
+import addressRouter from './routes/address.route.js';
 
 const app = express();
 app.use(cors({
@@ -38,6 +39,7 @@ app.use('/subcategory', SubCategoryRouter);
 app.use('/product', productRouter);
 app.use('/cartproduct', cartProductRouter);
 app.use('/order', orderRouter);
+app.use('/address', addressRouter);
 
 const PORT = 3000 || process.env.PORT;
 connectDB().then(() => {

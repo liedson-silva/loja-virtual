@@ -10,8 +10,8 @@ const UploadAddress = ({ close, fetchData }) => {
         address_line: '',
         city: '',
         state: '',
+        country: '',
         pincode: '',
-        country: 'Brasil',
         mobile: ''
     });
     const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const UploadAddress = ({ close, fetchData }) => {
             });
 
             if (response.data.success) {
-                toast.success(response.data.message || "Endereço salvo!");
+                toast.success(response.data.message);
                 close();
                 fetchData();
             }
@@ -57,24 +57,22 @@ const UploadAddress = ({ close, fetchData }) => {
                 </div>
 
                 <form onSubmit={handleSubmit} className='p-6 grid gap-4'>
-                    <div className='grid gap-1'>
-                        <label htmlFor="address_line" className="flex items-center gap-1 font-semibold text-gray-700 text-sm">
-                            Endereço Completo:
-                        </label>
-                        <input
-                            type="text"
-                            id='address_line'
-                            name='address_line'
-                            placeholder='Rua, número, complemento e bairro'
-                            value={data.address_line}
-                            onChange={handleOnChange}
-                            required
-                            className='w-full px-3 py-2 bg-blue-50 outline-none border border-blue-200 rounded-lg focus:border-primary-100 transition-all'
-                        />
-                    </div>
-
-                    {/* Linha: Cidade e Estado */}
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div className='grid gap-1'>
+                            <label htmlFor="address_line" className="flex items-center gap-1 font-semibold text-gray-700 text-sm">
+                                Endereço Completo:
+                            </label>
+                            <input
+                                type="text"
+                                id='address_line'
+                                name='address_line'
+                                placeholder='Rua, número, complemento e bairro'
+                                value={data.address_line}
+                                onChange={handleOnChange}
+                                required
+                                className='w-full px-3 py-2 bg-blue-50 outline-none border border-blue-200 rounded-lg focus:border-primary-100 transition-all'
+                            />
+                        </div>
                         <div className='grid gap-1'>
                             <label htmlFor="city" className="flex items-center gap-1 font-semibold text-gray-700 text-sm">
                                 Cidade:
@@ -105,10 +103,21 @@ const UploadAddress = ({ close, fetchData }) => {
                                 className='w-full px-3 py-2 bg-blue-50 outline-none border border-blue-200 rounded-lg focus:border-primary-100'
                             />
                         </div>
-                    </div>
-
-                    {/* Linha: CEP e Celular */}
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div className='grid gap-1'>
+                            <label htmlFor="country" className="flex items-center gap-1 font-semibold text-gray-700 text-sm">
+                                País:
+                            </label>
+                            <input
+                                type="text"
+                                id='country'
+                                name='country'
+                                placeholder='Ex: Brasil'
+                                value={data.country}
+                                onChange={handleOnChange}
+                                required
+                                className='w-full px-3 py-2 bg-blue-50 outline-none border border-blue-200 rounded-lg focus:border-primary-100'
+                            />
+                        </div>
                         <div className='grid gap-1'>
                             <label htmlFor="pincode" className="flex items-center gap-1 font-semibold text-gray-700 text-sm">
                                 CEP:
@@ -141,9 +150,7 @@ const UploadAddress = ({ close, fetchData }) => {
                         </div>
                     </div>
 
-                    {/* Botão de Ação */}
                     <div className='flex gap-3 mt-4'>
-
                         <button
                             type='submit'
                             disabled={loading}

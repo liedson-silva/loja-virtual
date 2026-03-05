@@ -129,6 +129,18 @@ const SummaryApi = {
         url: '/order/get-orders-by-user',
         method: 'get',
     },
+    addAddress: {
+        url: '/address/add-address',
+        method: 'post'
+    },
+    getAddress: {
+        url: '/address/get-address',
+        method: 'get'
+    },
+    deleteAddress: {
+        url: '/address/delete-address',
+        method: 'delete'
+    },
 }
 
 export default SummaryApi;

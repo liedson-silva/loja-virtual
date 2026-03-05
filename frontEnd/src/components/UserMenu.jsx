@@ -78,7 +78,7 @@ const UserMenu = ({ close }) => {
                     onClick={handleClose}
                     to={"/dashboard/my-orders"}
                     className='hover:text-primary-100'>
-                    Meus Pedidos
+                    Pedido
                 </Link>
                 <Link
                     onClick={handleClose}

@@ -50,7 +50,7 @@ export const CreateProductController = async (req, res) => {
         });
     }
 }
-
+ 
 export const GetProductController = async (req, res) => {
     try {
         let { page, limit, search } = req.body;
